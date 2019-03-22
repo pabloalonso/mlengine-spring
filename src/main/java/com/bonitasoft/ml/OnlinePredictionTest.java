@@ -4,7 +4,7 @@ package com.bonitasoft.ml;
  * @author Pablo Alonso de Linaje García
  */
 public class OnlinePredictionTest {
-    void testPredict() throws Exception {
+    public static void main(String[] args) throws Exception {
         String projectId = "demoforrester";
         String modelId = "census_forrester_3";
         String versionId = "v1";

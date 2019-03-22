@@ -30,6 +30,9 @@ import com.google.api.services.discovery.model.JsonSchema;
 import com.google.api.services.discovery.model.RestDescription;
 import com.google.api.services.discovery.model.RestMethod;
 
+import java.io.FileInputStream;
+import java.util.Collections;
+
 
 
 /*
@@ -66,7 +69,10 @@ public class OnlinePrediction {
     final byte [] contentBytes = json.getBytes();
     final HttpContent content = new ByteArrayContent(contentType, contentBytes );
 
-    GoogleCredential credential = GoogleCredential.getApplicationDefault();
+    //GoogleCredential credential = GoogleCredential.getApplicationDefault();
+
+        GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream("C:\\GoogleML\\credential.json"))
+                .createScoped(Collections.singleton("https://www.googleapis.com/auth/cloud-platform"));
     /*
     File initialFile = new File("credentials.json");
     InputStream inputStream = new FileInputStream(initialFile);
