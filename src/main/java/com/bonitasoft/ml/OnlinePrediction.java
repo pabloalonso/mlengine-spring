@@ -14,6 +14,8 @@ package com.bonitasoft.ml;/*
  * limitations under the License.
  */
 
+import java.util.Collections;
+
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.ByteArrayContent;
@@ -30,9 +32,6 @@ import com.google.api.services.discovery.model.JsonSchema;
 import com.google.api.services.discovery.model.RestDescription;
 import com.google.api.services.discovery.model.RestMethod;
 
-import java.io.FileInputStream;
-import java.util.Collections;
-
 
 
 /*
@@ -44,7 +43,7 @@ public class OnlinePrediction {
 
 
 
-    public static String predict(String projectId, String modelId , String versionId, String json) throws Exception{
+    public String predict(String projectId, String modelId , String versionId, String json) throws Exception{
 
     HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
     JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
@@ -70,9 +69,14 @@ public class OnlinePrediction {
     final HttpContent content = new ByteArrayContent(contentType, contentBytes );
 
     //GoogleCredential credential = GoogleCredential.getApplicationDefault();
+        //new FileInputStream("/credential.json")
+        //getClass().getResourceAsStream("/file.txt")
 
-        GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream("C:\\GoogleML\\credential.json"))
+
+    GoogleCredential credential = GoogleCredential.fromStream(getClass().getResourceAsStream("/credential.json"))
                 .createScoped(Collections.singleton("https://www.googleapis.com/auth/cloud-platform"));
+
+
     /*
     File initialFile = new File("credentials.json");
     InputStream inputStream = new FileInputStream(initialFile);
